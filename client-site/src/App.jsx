@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Routes, Route, Link } from "react-router-dom";
+import Converter from './pages/Converter';
+import Subscription from './pages/Subscription';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <Link to={'/'}>TextPDF Pro</Link>
+          </h1>
+          <nav className="flex bg-gray-100 rounded-full p-1">
+  
+            <Link
+              to="/subscription"
+              className="px-6 py-2 rounded-full font-medium text-gray-600 hover:text-gray-900"
+            >
+              Pricing
+            </Link>
+          </nav>
+        </div>
+      </header>
 
-export default App
+      {/* Pages */}
+      <main className="pt-24 pb-16">
+        <Routes>
+          <Route path="/" element={<Converter />} />
+          <Route path="/subscription" element={<Subscription />} />
+        </Routes>
+      </main>
+    </>
+  );
+}
